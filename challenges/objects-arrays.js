@@ -142,12 +142,8 @@ The zoo wants to display both the scientific name and the animal name in front o
 
 */
 const animalNames = [];
-const names = function(arr) {
-  for (i=0; i<zooAnimals.length; i++) {
-    animalNames.push(`${arr[i].animal_name} ${arr[i].scientific_name}`)
-  }
-}
-names(zooAnimals);
+zooAnimals.forEach(index => animalNames.push(`${index.animal_name} ${index.scientific_name}`));
+
 console.log(animalNames);
 
 /* Request 2: .map()    
@@ -156,12 +152,8 @@ The zoos need a list of all their animal's names (names only, not scientific) co
 
 */
 const lowerCase = [];
-function lowerCaseNames(arr) {
-  for(i=0; i<zooAnimals.length; i++) {
-    lowerCase.push(arr[i].animal_name.toLowerCase());
-  }
-}
-lowerCaseNames(zooAnimals);
+zooAnimals.map(index => lowerCase.push(index.animal_name));
+
 console.log(lowerCase); 
 
 /* Request 3: .filter() 
@@ -169,27 +161,20 @@ console.log(lowerCase);
 The zoos are concenred about animals with a lower population count. Find out which animals have a population less than 5.
 
 */
-//NOT SURE WHY ITS CALLED LARGERPOPULATION BUT THATS WHERE IM GOING TO PUSH THE ANIMALS WITH POP<5
 const largerPopulation = [];
-function endangered(arr) {
-  for(i=0; i<zooAnimals.length; i++) {
-    if(arr[i].population<6) {
-      largerPopulation.push(arr[i].animal_name);
-    }
-  }
-}
-endangered(zooAnimals);
+zooAnimals.filter(index => { if (index.population < 5) largerPopulation.push(index.animal_name) });
+
 console.log(largerPopulation);
 
 /* Request 4: .reduce() 
 
 The zoos need to know their total animal population across the United States.  Find the total population from all the zoos using the .reduce() method.
+*/ 
+const populationTotal = zooAnimals.reduce((total, animal) => {
+  return total += animal.population
+}, 0);
 
-// */
-// const populationTotal = 0;
-// const reducer = (acc, currentValue) => acc + currentValue;
-// populationTotal.push(zooAnimals.object.reduce(reducer));
-// console.log(populationTotal);
+console.log(populationTotal);
 
 
 /* 
